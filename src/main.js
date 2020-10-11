@@ -16,6 +16,7 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router/index";
+import BootstrapVue from 'bootstrap-vue'
 import moment from 'moment'
 
 /*********************************************************/
@@ -25,9 +26,6 @@ import axios from 'axios'
 //const app = Vue.createApp(...)
 //Vue.use(VueAxios)
 Vue.use(axios)
-/*********************************************************/
-import BootstrapVue from 'bootstrap-vue'
-Vue.use(BootstrapVue)
 
 /*********************************************************/
 import Ionic from "@ionic/vue";
@@ -47,7 +45,21 @@ window.toastr = require('toastr')
 Vue.use(VueToastr2)
 
 /*********************************************************/
+import './components/matriz/declareComponents.js'
 
+
+// Required to enable animations on dropdowns/tooltips/popovers
+//Popper.Defaults.modifiers.computeStyle.gpuAcceleration = false
+
+Vue.config.productionTip = false
+
+Vue.use(BootstrapVue)
+/*********************************************************/
+import store from './store'
+
+/*********************************************************/
+
+axios.defaults.baseURL = 'http://127.0.0.1:8001/api';
 
 Vue.filter('DateFormat',function(date){
   moment.locale('es');
@@ -72,5 +84,6 @@ if(!isNaN(num)){
 /* eslint-disable no-new */
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");

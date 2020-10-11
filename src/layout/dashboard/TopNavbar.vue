@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light">
+  <!--nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">{{routeName}}</a>
       <button class="navbar-toggler navbar-burger"
@@ -39,7 +39,7 @@
           </li>
         </ul>
       </div>
-    </div></nav>
+    </div></nav-->
 </template>
 <script>
 export default {

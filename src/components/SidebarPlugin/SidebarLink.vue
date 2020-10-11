@@ -5,9 +5,10 @@
              v-bind="$attrs"
              tag="li">
     <a class="nav-link">
-      <slot>
+      <slot v-if="name =='Dashboard'">
         <i v-if="icon" :class="icon"></i>
-        <p>{{name}}</p>
+        <!--p>{{name}}</p-->
+        <p v-if="name =='Dashboard'">PROCESO</p>
       </slot>
     </a>
   </component>

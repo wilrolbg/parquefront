@@ -17,11 +17,16 @@ const routes = [
     component: DashboardLayout,
     redirect: "/dashboard",
     children: [
-      {
+     /* {
         path: "dashboard",
         name: "dashboard",
         component: Dashboard
-      },
+      },*/
+      {
+        path: "dashboard",
+        name: "Procesos",
+        component: () => import('@/components/procesos/procesos')
+      },      
       {
         path: "stats",
         name: "stats",
@@ -51,7 +56,12 @@ const routes = [
         path: "table-list",
         name: "table-list",
         component: TableList
-      }
+      }/*,
+      {
+        path: '/procesos',
+        name: 'procesos',   
+        component: () => import('@/components/procesos/procesos')
+      }      */
     ]
   },
   { path: "*", component: NotFound }

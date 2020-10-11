@@ -1,13 +1,12 @@
 import Vue from 'vue'
-import Vuex from '../../node_modules/vuex'
-import '../../node_modules/es6-promise/auto'
-
+import axios from 'axios'
+import Vuex from 'vuex'
+import 'es6-promise/auto'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {    
-    codigoMsgLogin: '',
-    mensajeLogin: '',
+    mapa: [],
         Paginacion: {
             'total': 0,
             'current_page': 0,
@@ -18,29 +17,6 @@ export default new Vuex.Store({
          }    
   },
   mutations: {
-    msgErrorLoginMut: function(state, codigo){
-      state.codigoMsgLogin = codigo;
-        switch (codigo) {
-          case '001':
-            state.mensajeLogin = 'Debe Ingresar su Correo Eletrónico';
-            break;
-          case '002':
-            state.mensajeLogin = 'Debe Ingresar su Contraseña';
-            break;          
-          case '003':
-            state.mensajeLogin = 'El formato del Correo Electrónico es Inválido';
-            break;
-          case '004':
-            state.mensajeLogin = 'Credenciales Inválidas';
-            break;            
-          default:
-            console.log('No hay usuarios logueados...');
-        }   
-    },
-    limpiarErrores: function(state){
-      this.state.codigoMsgLogin = '';
-      this.state.mensajeLogin = '';
-    },
     cargarPaginador: function(state, objPaginacion){ // PAGINADOR
       this.state.Paginacion.total         = objPaginacion.total;
       this.state.Paginacion.current_page  = objPaginacion.current_page;
@@ -56,10 +32,23 @@ export default new Vuex.Store({
   actions: {
     actualPagina: function(context, pagina){     // PAGINADOR
       context.commit('paginaActual', pagina);
-    },      
-    msgErrorLoginAct: function(context, codigo){
-    context.commit('msgErrorLoginMut', codigo);
-    }      
+    },
+		cargarMapa: function(context){
+			let url = '/mapa/cargar';
+			return new Promise((resolve, reject, response) =>{
+				axios
+				.get(url)
+				.then((response) => {
+					if(response.status === 200){																
+						resolve(response);
+						//console.log(response.data.data);
+					}
+				})
+				.catch(error => {
+					reject(error);
+				});
+			});			
+		}        
   },
   modules: {
 

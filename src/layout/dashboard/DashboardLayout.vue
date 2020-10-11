@@ -62,7 +62,7 @@ export default {
     MobileMenu
   },
 		mounted(){
-      this.$toastr.success('Hola Wilson', 'Bienvenido');
+      this.$toastr.success('Bienvenido', 'Parqueadero');
 		},	  
   methods: {
     toggleSidebar() {
