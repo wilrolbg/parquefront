@@ -41,6 +41,21 @@ export default new Vuex.Store({
 				.then((response) => {
 					if(response.status === 200){																
 						resolve(response);
+					}
+				})
+				.catch(error => {
+					reject(error);
+				});
+			});			
+    },
+    cargarTipoVehiculo: function(context){
+			let url = '/tipovehiculo/cargar';
+			return new Promise((resolve, reject, response) =>{
+				axios
+				.get(url)
+				.then((response) => {
+					if(response.status === 200){																
+						resolve(response);
 						//console.log(response.data.data);
 					}
 				})
@@ -48,7 +63,55 @@ export default new Vuex.Store({
 					reject(error);
 				});
 			});			
-		}        
+    },
+    cargarPuestosDisponibles: function(context, id){
+			let url = `/disponibles/cargar/${id}`;
+			return new Promise((resolve, reject, response) =>{
+				axios
+				.get(url)
+				.then((response) => {
+					if(response.status === 200){																
+						resolve(response);
+						//console.log(response.data.data);
+					}
+				})
+				.catch(error => {
+					reject(error);
+				});
+			});			
+		},
+		buscarPersona: function(context, documento){
+			let url = `/personas/buscar/${documento}`;
+			return new Promise((resolve, reject, response) =>{
+				axios
+				.get(url)
+				.then((response) => {
+					if(response.status === 200){																
+						resolve(response);
+						//console.log(response.data.data);
+					}
+				})
+				.catch(error => {
+					reject(error);
+				});
+			});			
+		},		
+		grabarEntrada: function(context, payload){
+			let url = '/entrada/registrar';
+			return new Promise((resolve, reject, response) =>{
+				axios
+				.post(url, payload)
+				.then((response) => {
+					if(response.status === 200){																
+						resolve(response);
+						//console.log(response.data.data);
+					}
+				})
+				.catch(error => {
+					reject(error);
+				});
+			});			
+		}   		     
   },
   modules: {
 

@@ -1,13 +1,12 @@
 <template>
     <div class="container">
-    <div class="modal-header">
-        <button type="button" class="btn btn-success" @click="registrarEntrada">REGISTRAR ENTRADA</button> 
-        <button type="button" class="btn btn-warning">REGISTRAR SALIDA</button> 
-    </div>        
-        <table class="table table-sm table-bordered">
+    <div class="col-md-12 d-block">
+        <table class="table table-bordered">
         <thead>
             <tr>
-                <th colspan="11" class="text-center top">PARQUEADERO</th>                
+                <th colspan="4" class="text-center top"><button type="button" class="btn btn-success" @click="habilitarForm('E')">REGISTRAR ENTRADA</button></th>
+                <th colspan="4" class="text-center top">PARQUEADERO</th> 
+                <th colspan="3" class="text-center top"><button type="button" class="btn btn-warning" @click="habilitarForm('S')">REGISTRAR SALIDA</button></th>               
             </tr>
         </thead>
         <tbody>
@@ -41,8 +40,11 @@
             </tr>                                                                        
         </tbody>
         </table> 
-        <Procesar-Entrada/>  
-    </div>
+        <Procesar-Entrada
+            v-if="entradaVisible"
+            @recargarMapa="recargarMapa"/>
+    </div>        
+</div>
 </template>
 
 <script>
@@ -58,7 +60,9 @@ export default {
                 fila3: [],
                 fila4: [],
                 fila5: []
-            }
+            },
+            entradaVisible: false,
+            salidaVisible: false
         }
     },
     mounted(){
@@ -105,8 +109,26 @@ export default {
                         console.log(error.config);
         })
         },
-        registrarEntrada: function(){
-            this.$bvModal.show("entrada");
+        habilitarForm: function(opcion){
+            if(opcion == 'E'){
+                this.entradaVisible = true;
+                this.salidaVisible = false;
+            }else{
+                this.salidaVisible = true;
+                this.entradaVisible = false;
+            }
+        },
+        recargarMapa: function(){
+            this.limpiarMapa();
+            this.cargarMapa();
+            
+        },
+        limpiarMapa: function(){
+            this.mapa.fila1 = [];
+            this.mapa.fila2 = [];
+            this.mapa.fila3 = [];
+            this.mapa.fila4 = [];
+            this.mapa.fila5 = [];
         }
     }
 }
