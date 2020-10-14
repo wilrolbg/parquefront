@@ -40,7 +40,7 @@ const routes = [
       {
         path: "icons",
         name: "icons",
-        component: Icons
+        component: () => import('@/components/configuracion/descuentos')
       },
       {
         path: "maps",
@@ -55,7 +55,7 @@ const routes = [
       {
         path: "table-list",
         name: "table-list",
-        component: TableList
+        component: () => import('@/components/configuracion/tarifas')
       }/*,
       {
         path: '/procesos',

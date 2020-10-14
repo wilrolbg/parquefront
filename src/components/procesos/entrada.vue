@@ -51,6 +51,7 @@ export default {
         return{
             entrada: {
                 id_persona: 0,
+                status_mov: 'A',
                 documento: '',
                 nombres: '',
                 apellidos: '',
@@ -78,9 +79,9 @@ export default {
             }else if(this.entrada.tipoVehiculo_id < 1){
                 this.$toastr.warning('Sebe Seleccionar un Tipo de Vehiculo', 'Advertencia');
             }else if(this.entrada.puesto_id < 1){
-                this.$toastr.warning('Sebe Seleccionar un Puesto', 'Advertencia');
+                this.entrada.puesto_id = this.objPuestosDisponibles[0].id;
+                this.grabarEntrada();
             }else{
-                console.log('Guardado');
                 this.grabarEntrada();
             }
         },
@@ -98,7 +99,7 @@ export default {
             this.$store
 		    .dispatch('buscarPersona', this.entrada.documento)
             .then(success => {
-                console.log(success);
+                //console.log(success);
                 if(success.data[0].original.Persona[0].id > 0){
                     this.entrada.id_persona = success.data[0].original.Persona[0].id;
                     this.entrada.nombres    = success.data[0].original.Persona[0].nombres;
@@ -127,8 +128,32 @@ export default {
 		    .dispatch('grabarEntrada', this.entrada)
             .then(success => {
                 //console.log(success);
-                this.$toastr.success('La Entrada ha sido Registrada con Exito', 'Parqueadero');
+                this.$toastr.success('Imprimiendo Ticket de Entrada', 'Parqueadero');
                 this.$emit('recargarMapa');
+                //imprimir ticket de entrada
+                    this.$store
+                    .dispatch('generarTicketEntrada', this.entrada.placaSerial)
+                    .then(success => {
+                        console.log(success);
+                        this.$store.dispatch('descargarPDF', success.data);
+                    })
+                    .catch(error =>{					
+                    if (error.response) {
+                        this.$toastr.error('Error de Respuesta', 'Parqueadero');
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                            if(error.response.status === 400){
+                                this.$toastr.error('Error 400', 'Parqueadero');					            	
+                                }
+                                console.log(error.response.headers);
+                            } else if (error.request) {
+                                console.log(error.request);
+                            } else {
+                                console.log('Error', error.message);
+                            }
+                                console.log(error.config);
+                })
+                //==================================================                 
                 this.limpiarPayload();
             })
             .catch(error =>{					
@@ -152,7 +177,7 @@ export default {
 		    this.$store
 		    .dispatch('cargarTipoVehiculo')
             .then(success => {
-            console.log(success);
+            //console.log(success);
                 this.objTipoVehiculo = success.data;
             })
             .catch(error =>{					
@@ -224,7 +249,7 @@ export default {
                             }
                           }
                     }                    
-                    console.log(success);
+                    //console.log(success);
                     //this.objTipoVehiculo = success.data;
                     })
                     .catch(error =>{					

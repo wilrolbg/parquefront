@@ -63,7 +63,55 @@ export default new Vuex.Store({
 					reject(error);
 				});
 			});			
-    },
+	},
+	cargarTarifas: function(context){
+		let url = '/tarifas/consultar';
+		return new Promise((resolve, reject, response) =>{
+			axios
+			.get(url)
+			.then((response) => {
+				if(response.status === 200){																
+					resolve(response);
+					//console.log(response.data.data);
+				}
+			})
+			.catch(error => {
+				reject(error);
+			});
+		});			
+	},
+	actualizarTarifas: function(context, objTarifas){
+		let url = `/tarifas/actualizar/${objTarifas.id}`;
+		return new Promise((resolve, reject, response) =>{
+			axios
+			.put(url, objTarifas)
+			.then((response) => {
+				if(response.status === 200){																
+					resolve(response);
+					//console.log(response.data.data);
+				}
+			})
+			.catch(error => {
+				reject(error);
+			});
+		});			
+	},
+	actualizarDescuento: function(context, objDescuento){
+		let url = `/descuento/actualizar/${objDescuento.id}`;
+		return new Promise((resolve, reject, response) =>{
+			axios
+			.put(url, objDescuento)
+			.then((response) => {
+				if(response.status === 200){																
+					resolve(response);
+					//console.log(response.data.data);
+				}
+			})
+			.catch(error => {
+				reject(error);
+			});
+		});			
+	},			
     cargarPuestosDisponibles: function(context, id){
 			let url = `/disponibles/cargar/${id}`;
 			return new Promise((resolve, reject, response) =>{
@@ -79,6 +127,22 @@ export default new Vuex.Store({
 					reject(error);
 				});
 			});			
+		},
+		consultarEntradaCliente: function(context, identificador){
+			let url = `/movimientos/buscar/${identificador}`;
+			return new Promise((resolve, reject, response) =>{
+				axios
+				.get(url)
+				.then((response) => {
+					if(response.status === 200){																
+						resolve(response);
+						//console.log(response.data.data);
+					}
+				})
+				.catch(error => {
+					reject(error);
+				});
+			});
 		},
 		buscarPersona: function(context, documento){
 			let url = `/personas/buscar/${documento}`;
@@ -111,7 +175,61 @@ export default new Vuex.Store({
 					reject(error);
 				});
 			});			
-		}   		     
+		},
+		grabarSalida: function(context, payload){
+			let url = `/registrar/salida/${payload.tipo_vehiculo_id}`;
+			return new Promise((resolve, reject, response) =>{
+				axios
+				.put(url, payload)
+				.then((response) => {
+					if(response.status === 200){																
+						resolve(response);
+						//console.log(response.data.data);
+					}
+				})
+				.catch(error => {
+					reject(error);
+				});
+			});			
+		},
+		generarTicketEntrada: function (context, id) {
+			let url = `/imprimir/ticketentrada/${id}`;
+			let token = sessionStorage.sessionToken;
+			return new Promise((resolve, reject) => {
+				axios
+					.get(url, {responseType: 'blob' })
+					.then((response) => {
+						if (response.status === 200) {
+							resolve(response);
+							//console.log(response);								
+						}
+					})
+					.catch(error => {
+						reject(error);
+					});
+			});
+		},
+		generarTicketSalida: function (context, payload) {
+			let url = '/imprimir/ticketsalida';
+			let token = sessionStorage.sessionToken;
+			return new Promise((resolve, reject) => {
+				axios
+					.post(url, payload, {responseType: 'blob' })
+					.then((response) => {
+						if (response.status === 200) {
+							resolve(response);
+							//console.log(response);								
+						}
+					})
+					.catch(error => {
+						reject(error);
+					});
+			});
+		},		
+		descargarPDF: function(context, blob){
+			var fileURL = URL.createObjectURL(blob);
+			  window.open(fileURL);	
+		  },   				 		   		     
   },
   modules: {
 

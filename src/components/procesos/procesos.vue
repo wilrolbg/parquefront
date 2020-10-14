@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-    <div class="col-md-12 d-block">
+    <div class="col-md-12 d-block">     
         <table class="table table-bordered">
         <thead>
             <tr>
@@ -42,7 +42,12 @@
         </table> 
         <Procesar-Entrada
             v-if="entradaVisible"
-            @recargarMapa="recargarMapa"/>
+            @recargarMapa="recargarMapa"
+        />
+        <Procesar-Salida
+            v-if="salidaVisible"
+            @recargarMapa="recargarMapa"
+        />        
     </div>        
 </div>
 </template>
