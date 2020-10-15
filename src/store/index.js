@@ -225,7 +225,79 @@ export default new Vuex.Store({
 						reject(error);
 					});
 			});
-		},		
+		},
+		generarEntradaSalida: function (context, payload) {
+			console.log(payload);
+			let url = '/imprimir/entradasalida';
+			let token = sessionStorage.sessionToken;
+			return new Promise((resolve, reject) => {
+				axios
+					.post(url, payload, {responseType: 'blob' })
+					.then((response) => {
+						if (response.status === 200) {
+							resolve(response);
+							//console.log(response);								
+						}
+					})
+					.catch(error => {
+						reject(error);
+					});
+			});
+		},
+		generarTipoVehiculos: function (context, payload) {
+			console.log(payload);
+			let url = '/imprimir/vehiculostipo';
+			let token = sessionStorage.sessionToken;
+			return new Promise((resolve, reject) => {
+				axios
+					.post(url, payload, {responseType: 'blob' })
+					.then((response) => {
+						if (response.status === 200) {
+							resolve(response);
+							//console.log(response);								
+						}
+					})
+					.catch(error => {
+						reject(error);
+					});
+			});
+		},
+		generarMontosXdia: function (context, payload) {
+			console.log(payload);
+			let url = '/imprimir/totaldiario';
+			let token = sessionStorage.sessionToken;
+			return new Promise((resolve, reject) => {
+				axios
+					.post(url, payload, {responseType: 'blob' })
+					.then((response) => {
+						if (response.status === 200) {
+							resolve(response);
+							//console.log(response);								
+						}
+					})
+					.catch(error => {
+						reject(error);
+					});
+			});
+		},			
+		generarIteraciones: function (context, payload) {
+			console.log(payload);
+			let url = '/imprimir/masutilizado';
+			let token = sessionStorage.sessionToken;
+			return new Promise((resolve, reject) => {
+				axios
+					.post(url, payload, {responseType: 'blob' })
+					.then((response) => {
+						if (response.status === 200) {
+							resolve(response);
+							//console.log(response);								
+						}
+					})
+					.catch(error => {
+						reject(error);
+					});
+			});
+		},								
 		descargarPDF: function(context, blob){
 			var fileURL = URL.createObjectURL(blob);
 			  window.open(fileURL);	

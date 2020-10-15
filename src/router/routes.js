@@ -45,7 +45,7 @@ const routes = [
       {
         path: "maps",
         name: "maps",
-        component: Maps
+        component: () => import('@/components/reportes/reportes')
       },
       {
         path: "typography",

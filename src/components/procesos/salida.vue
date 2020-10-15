@@ -1,5 +1,6 @@
 <template>
       <div class="content">
+          <div class="shadow col-lg-12 p-4">
         <form>
         <div class="row">
             <label class="titulos"><h5>Registrar Salida</h5></label>
@@ -47,7 +48,8 @@
                 <label v-if="entrada.hora_entrada != ''" class="titulos">{{ entrada.hora_entrada }}</label>
             </div>                               
         </div>        
-        </form>            
+        </form>
+        </div>            
       </div>    
 </template>
 
@@ -84,13 +86,7 @@ export default {
     },
     methods: {
         limpiarPayload: function(){
-            this.entrada.documento = '';
-            this.entrada.nombres = '';
-            this.entrada.apellidos = '';
-            this.entrada.descripcion = '';
-            this.entrada.puesto = '';
-            this.entrada.fecha_entrada = '';
-            this.entrada.hora_entrada = '';
+            this.entrada.identificador = '';
         },
         grabarSalida: function(){
           this.$store
@@ -121,7 +117,7 @@ export default {
                             }
                                 console.log(error.config);
                     })  
-                //this.limpiarPayload();
+                this.limpiarPayload();
             })
             .catch(error =>{					
             if (error.response) {

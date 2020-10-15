@@ -5,12 +5,13 @@
              v-bind="$attrs"
              tag="li">
     <a class="nav-link">
-      <slot v-if="name =='Dashboard' || name == 'Table List' || name == 'Icons'">
+      <slot v-if="name =='Dashboard' || name == 'Table List' || name == 'Icons' || name == 'Map'">
         <i v-if="icon" :class="icon"></i>
         <!--p>{{name}}</p-->
         <p v-if="name =='Dashboard'">PROCESO</p>
         <p v-if="name =='Table List'">TARIFAS</p>
         <p v-if="name =='Icons'">DESCUENTOS</p>
+        <p v-if="name =='Map'">REPORTES</p>
       </slot>
     </a>
   </component>

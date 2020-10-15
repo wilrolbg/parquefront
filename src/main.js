@@ -16,8 +16,10 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router/index";
-import BootstrapVue from 'bootstrap-vue'
 import moment from 'moment'
+import BootstrapVue from "bootstrap-vue"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap-vue/dist/bootstrap-vue.css"
 
 /*********************************************************/
 import axios from 'axios'
@@ -53,7 +55,6 @@ import './components/matriz/declareComponents.js'
 
 Vue.config.productionTip = false
 
-Vue.use(BootstrapVue)
 /*********************************************************/
 import store from './store'
 
@@ -81,6 +82,8 @@ if(!isNaN(num)){
   }	
 });
 
+
+Vue.use(BootstrapVue)
 /* eslint-disable no-new */
 new Vue({
   router,

@@ -1,23 +1,29 @@
 <template>
     <div class="content ml-5 pl-5">
+        <div class="shadow col-lg-8 pb-4">
         <form>
-        <div class="row">
+        <div class="row ml-2">
             <label class="titulos"><h2>Configurar Descuentos</h2></label>
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                <label class="titulos">Porcentaje de Descuento</label><br>
+        <div class="row ml-5">
+            <div class="col-md-4">
+                <label class="titulos">% de Descuento</label><br>
                 <input v-model="descuento.porcentaje" type="text" class="form-control-sm redondeadonorelieve" id="identificador" placeholder="Monto" autocomplete="off">
-            </div>
-            <div class="col-md-3">
+            </div>                                                                  
+        </div>
+        <div class="row ml-5">
+            <div class="col-md-4">
                 <label class="titulos">Descuento por Minutos</label><br>
                 <input v-model="descuento.tiempo" type="text" class="form-control-sm redondeadonorelieve" id="identificador" placeholder="Monto" autocomplete="off">
-            </div> 
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-2 pt-3">
                 <button type="button" class="btn btn-success" @click="validar">SALVAR</button>
-            </div>                                           
+            </div>  
         </div> 
-        </form>  
+        </form>
+        </div> 
     </div>    
 </template>
 

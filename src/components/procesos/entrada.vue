@@ -1,5 +1,6 @@
 <template>
       <div class="content">
+        <div class="shadow col-lg-12 p-4">
         <form>
         <div class="row">
             <label class="titulos"><h5>Registrar Entrada</h5></label>
@@ -41,7 +42,8 @@
                     </select>
             </div>                     
         </div>        
-        </form>            
+        </form>
+        </div>
       </div>
 </template>
 
@@ -271,6 +273,7 @@ export default {
             }              
         },
         limpiarPayload: function(){
+            this.entrada.id_persona = 0;
             this.entrada.documento = '';
             this.entrada.nombres = '';
             this.entrada.apellidos = '';

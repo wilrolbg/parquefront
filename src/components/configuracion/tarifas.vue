@@ -1,10 +1,11 @@
 <template>
     <div class="content ml-5 pl-5">
+        <div class="shadow col-lg-8 pb-4">
         <form>
-        <div class="row">
+        <div class="row ml-2">
             <label class="titulos"><h2>Configurar Tarifas</h2></label>
         </div>
-        <div class="row">
+        <div class="row pl-4 ml-5">
             <div class="col-md-3">
                 <label class="titulos">Tipo de Vehiculo</label><br>
                     <select v-model="tarifas.tipoVehiculo_id" @change="asignarId" class="form-control-sm redondeadonorelieve" id="tipo_vehiculo_id">
@@ -15,12 +16,15 @@
             <div class="col-md-3">
                 <label class="titulos">Precio</label><br>
                 <input v-model="tarifas.monto" type="text" class="form-control-sm redondeadonorelieve" id="identificador" placeholder="Monto" autocomplete="off">
-            </div> 
+            </div>                                                        
+        </div>
+        <div class="row">
             <div class="col-md-2 pt-3">
                 <button type="button" class="btn btn-success" @click="validar">SALVAR</button>
-            </div>                                           
-        </div> 
-        </form>  
+            </div>
+        </div>
+        </form> 
+        </div>
     </div>
 </template>
 
